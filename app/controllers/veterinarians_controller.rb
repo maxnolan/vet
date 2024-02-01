@@ -20,6 +20,23 @@ class VeterinariansController < ApplicationController
       render json: @vet.errors, status: :unprocessable_entity
     end
   end
+
+  def update
+    @vet = Veterinarian.find(params[:id])
+
+    if @vet.update(veterinarian_params)
+      render json: @vet
+    else
+      render json: @vet.errors, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @vet = Veterinarian.find(params[:id])
+    @vet.destroy
+
+     render status: :no_content
+  end
   
   private
     def veterinarian_params
