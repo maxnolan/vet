@@ -1,24 +1,8 @@
-# README
+# Vet API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is an API I created to learn Active Record Associations in Rails.
 
-Things you may want to cover:
+## Run
 
-* Ruby version
+`rails server`
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
