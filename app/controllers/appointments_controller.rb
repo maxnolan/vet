@@ -5,6 +5,12 @@ class AppointmentsController < ApplicationController
     render json: @appointments
   end
 
+  def show
+    @appointment = Appointment.find(params[:id])
+
+    render json: @appointment
+  end
+
   def create
     @appointment = Appointment.new(appointment_params)
 
@@ -13,6 +19,23 @@ class AppointmentsController < ApplicationController
     else
       render json: @appointment.errors, status: :unprocessable_entity
     end
+  end
+
+  def update
+    @appointment = Appointment.find(params[:id])
+
+    if @appointment.update(appointment_params)
+      render json: @appointment, status: :ok
+    else
+      render json: @appointment.errors, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @appointment = Appointment.find(params[:id])
+    @appointment.destroy
+
+    render status: :no_content
   end
 
   private
