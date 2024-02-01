@@ -4,11 +4,11 @@ Rails.application.routes.draw do
   resources :appointments
 
   resources :pets do
-    resources :photos
+    resources :photos, only: :create, module: 'pets'
   end
 
   resources :veterinarians do
-    resources :photos
+    resources :photos, only: :create, module: 'veterinarians'
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
