@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :appointments
 
   resources :pets do
-    resources :photos, only: :create, module: 'pets'
+    resources :photos, only: [:index, :show, :create], module: 'pets'
   end
 
   resources :veterinarians do

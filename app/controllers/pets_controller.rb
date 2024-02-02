@@ -8,14 +8,14 @@ class PetsController < ApplicationController
   def show
     @pet = Pet.find(params[:id])
 
-    render json: @pet, include: :photo
+    render json: @pet
   end
 
   def create
     @pet = Pet.new(pet_params)
 
     if @pet.save
-      render json: @pet, include: :photo, status: :created
+      render json: @pet, status: :created
     else
       render json: @pet.errors, status: :unprocessable_entity
     end
