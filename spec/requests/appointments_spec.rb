@@ -98,7 +98,7 @@ RSpec.describe "/appointments", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { appointment_time: Date.tomorrow + 1.day }
       }
 
       it "updates the requested appointment" do
@@ -106,7 +106,7 @@ RSpec.describe "/appointments", type: :request do
         patch appointment_url(appointment),
               params: { appointment: new_attributes }, headers: valid_headers, as: :json
         appointment.reload
-        skip("Add assertions for updated state")
+        expect(appointment.appointment_time).to eq(new_attributes[:appointment_time])
       end
 
       it "renders a JSON response with the appointment" do

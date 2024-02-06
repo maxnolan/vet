@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_02_171159) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_05_184742) do
   create_table "appointments", force: :cascade do |t|
     t.integer "pet_id"
     t.integer "veterinarian_id"
@@ -19,6 +19,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_02_171159) do
     t.datetime "updated_at", null: false
     t.index ["pet_id"], name: "index_appointments_on_pet_id"
     t.index ["veterinarian_id"], name: "index_appointments_on_veterinarian_id"
+  end
+
+  create_table "diagnoses", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "diagnoses_pets", id: false, force: :cascade do |t|
+    t.integer "diagnosis_id", null: false
+    t.integer "pet_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["diagnosis_id"], name: "index_diagnoses_pets_on_diagnosis_id"
+    t.index ["pet_id"], name: "index_diagnoses_pets_on_pet_id"
   end
 
   create_table "pets", force: :cascade do |t|
@@ -45,4 +60,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_02_171159) do
 
   add_foreign_key "appointments", "pets"
   add_foreign_key "appointments", "veterinarians"
+  add_foreign_key "diagnoses_pets", "diagnoses"
+  add_foreign_key "diagnoses_pets", "pets"
 end

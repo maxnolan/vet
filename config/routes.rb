@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
   resources :appointments
 
   resources :pets do
     resources :photos, only: [:index, :show, :create], module: 'pets'
+    resources :diagnoses, except: [:show, :update], controller: 'pet_diagnoses'
   end
 
   resources :veterinarians do
