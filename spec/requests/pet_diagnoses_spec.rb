@@ -50,4 +50,16 @@ RSpec.describe "PetDiagnoses", type: :request do
       end
     end
   end
+
+  describe "DELETE /destroy" do
+    it "removes the diagnosis from the pet" do
+      diagnosis = @pet.diagnoses.create!(name: "My Diagnosis")
+
+      delete pet_diagnosis_path(pet_id: @pet.id, id: diagnosis.id),
+             headers: valid_headers, as: :json
+
+      @pet.reload
+      expect(@pet.diagnoses.count).to eq(0)
+    end
+  end
 end

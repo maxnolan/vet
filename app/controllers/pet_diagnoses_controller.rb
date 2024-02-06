@@ -1,5 +1,4 @@
 class PetDiagnosesController < ApplicationController
-  before_action :set_diagnosis, except: ['index', 'create']
   before_action :set_pet
 
   # GET /diagnoses
@@ -17,6 +16,7 @@ class PetDiagnosesController < ApplicationController
 
   # DELETE /diagnoses/1
   def destroy
+    @diagnosis = Diagnosis.find(params[:id])
     @pet.diagnoses.delete(@diagnosis)
 
     render json: @pet.diagnoses
@@ -24,10 +24,6 @@ class PetDiagnosesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_diagnosis
-      @diagnosis = Diagnosis.find(params[:id])
-    end
-
     def set_pet
       @pet = Pet.find(params[:pet_id])
     end
